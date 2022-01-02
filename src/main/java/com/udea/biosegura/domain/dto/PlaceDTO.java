@@ -1,32 +1,15 @@
-package com.udea.biosegura.persistence.entity;
+package com.udea.biosegura.domain.dto;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "places")
-public class Place {
+public class PlaceDTO {
 
-    @Id
-    @Column(name = "id_place")
     private String idPlace;
-
-    @Column(name = "name_place")
     private String namePlace;
     private String phone;
     private String address;
     private int capacity;
-
-    @OneToMany(mappedBy = "place",  cascade = {CascadeType.ALL})
-    private List<Invitation> invitations;
-
-    public List<Invitation> getInvitations() {
-        return invitations;
-    }
-
-    public void setInvitations(List<Invitation> invitations) {
-        this.invitations = invitations;
-    }
+    private List<InvitationDTO> invitations;
 
     public String getIdPlace() {
         return idPlace;
@@ -66,5 +49,13 @@ public class Place {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public List<InvitationDTO> getInvitations() {
+        return invitations;
+    }
+
+    public void setInvitations(List<InvitationDTO> invitations) {
+        this.invitations = invitations;
     }
 }

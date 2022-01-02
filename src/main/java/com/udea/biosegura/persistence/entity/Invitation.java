@@ -2,6 +2,7 @@ package com.udea.biosegura.persistence.entity;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "invitations")
 public class Invitation {
