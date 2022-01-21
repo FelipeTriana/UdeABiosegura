@@ -2,6 +2,7 @@ package com.udea.biosegura.persistence.entity;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "invitations")
 public class Invitation {
@@ -13,10 +14,12 @@ public class Invitation {
     private String out_date;
 
     @ManyToOne
+    @MapsId("idUser")
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne
+    @MapsId("idPlace")
     @JoinColumn(name = "id_place", insertable = false, updatable = false)
     private Place place;
 
