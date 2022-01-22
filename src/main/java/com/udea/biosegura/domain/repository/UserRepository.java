@@ -10,7 +10,7 @@ public interface UserRepository {
     List<UserDTO> getAll();
     Optional<UserDTO> getUser(String idUser);
     UserDTO save(UserDTO userdto);
-    void delete(String idUser);
+    boolean delete(String idUser);
 
     
 }

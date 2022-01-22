@@ -29,7 +29,8 @@ public class UserPersistenceRepository implements UserRepository {
 
     @Override
     public Optional<UserDTO> getUser(String idUser) {
-        return Optional.empty();
+        Optional<User> user = userCrudRepository.findById(idUser);  //Ready
+        return  user.map(usr ->mapper.toUserDTO(usr));
     }
 
     @Override
@@ -39,7 +40,8 @@ public class UserPersistenceRepository implements UserRepository {
     }
 
     @Override
-    public void delete(String idUser) {
+    public boolean delete(String idUser) {
         userCrudRepository.deleteById(idUser);                       //Ready
+        return true;
     }
 }

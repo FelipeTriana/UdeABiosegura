@@ -16,14 +16,15 @@ public class UserService {
 
     public List<UserDTO> getAll(){return userRepository.getAll();}
 
+    public Optional<UserDTO> getUser(String idUser){return userRepository.getUser(idUser);}
 
     public UserDTO save(UserDTO userdto){return userRepository.save(userdto);}
 
-    /*public boolean delete(String idUser){
-        return getUser(idUser).map(clt -> {
+    public boolean delete(String idUser){
+        return getUser(idUser).map(usr -> {
             userRepository.delete(idUser);
             return true;
         }).orElse(false);
-    }*/
+    }
 
 }
