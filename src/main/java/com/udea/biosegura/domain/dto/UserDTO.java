@@ -9,7 +9,7 @@ public class UserDTO {
     private String phone;
     private String email;
     private String address;
-    private List<InvitationDTO> invitations;
+  //  private List<InvitationDTO> invitations;
 
     public String getIdUser() {
         return idUser;
@@ -50,7 +50,7 @@ public class UserDTO {
     public void setAddress(String address) {
         this.address = address;
     }
-
+/*
     public List<InvitationDTO> getInvitations() {
         return invitations;
     }
@@ -58,4 +58,5 @@ public class UserDTO {
     public void setInvitations(List<InvitationDTO> invitations) {
         this.invitations = invitations;
     }
+    */
 }

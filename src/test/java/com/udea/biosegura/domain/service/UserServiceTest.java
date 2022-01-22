@@ -25,10 +25,8 @@ class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-
     private UserDTO userdto;
 
-    private List<InvitationDTO> invitations;
 
     @BeforeEach
     void setUp() {
@@ -39,7 +37,6 @@ class UserServiceTest {
         userdto.setPhone("3193662132");
         userdto.setEmail("felipetrianago@gmail.com");
         userdto.setAddress("Calle 123");
-        //userdto.setInvitations(invitations);
 
     }
 
