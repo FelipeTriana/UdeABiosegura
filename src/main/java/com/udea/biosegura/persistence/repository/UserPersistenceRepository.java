@@ -40,8 +40,9 @@ public class UserPersistenceRepository implements UserRepository {
     }
 
     @Override
-    public boolean delete(String idUser) {
+    public String delete(String idUser) {
         userCrudRepository.deleteById(idUser);                       //Ready
-        return true;
+        System.out.println("Success");
+        return "Success";
     }
 }

@@ -3,6 +3,7 @@ package com.udea.biosegura.domain.service;
 import com.udea.biosegura.domain.dto.InvitationDTO;
 import com.udea.biosegura.domain.dto.UserDTO;
 import com.udea.biosegura.domain.repository.UserRepository;
+import com.udea.biosegura.persistence.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -41,7 +42,7 @@ class UserServiceTest {
         userdto.setAddress("Calle 123");
 
         optUserDto = Optional.of(userdto);   //Wrap for userdto, used in getUser
-
+        when(userRepository.getUser("1035439685")).thenReturn(optUserDto); //Needed for delete() and getUser()
     }
 
     @Test
@@ -52,8 +53,10 @@ class UserServiceTest {
 
     @Test
     void getUser() {
-        when(userRepository.getUser("1035439685")).thenReturn(optUserDto);
-        assertNotNull(userService.getUser("1035439685"));
+
+        Optional<UserDTO> reponseService;
+        reponseService = userService.getUser("1035439685");
+        assertEquals(Optional.of("3193662132"), reponseService.map(usr -> usr.getPhone()));
     }
 
     @Test
@@ -64,8 +67,10 @@ class UserServiceTest {
 
     @Test
     void delete() {
-        when(userRepository.delete("1035439685")).thenReturn(true);
-        assertNotNull(userService.delete("1035439685"));
+        when(userRepository.delete("1035439685")).thenReturn("Success");
+        boolean responseService = userService.delete("1035439685");
+        System.out.println(responseService);
+        assertEquals(true, responseService);
     }
 
 }
