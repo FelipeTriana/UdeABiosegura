@@ -38,7 +38,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void shouldReturnAListOfUsersWhenTheListOfUsersIsRequested(){
+    public void shouldReturnAListOfUsers(){
         //Arrange
         when(userService.getAll()).thenReturn(Arrays.asList(userdto)); //Setting up the mock to return a list on the call to the service in the controller
 
@@ -155,7 +155,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void shouldReturnStatusCode404WhenAnUserIsNotFoundWhenIsDeletedByItsId(){
+    public void shouldReturnStatusCode404WhenAnUserDeletedByItsIdIsNotFound(){
         //Arrange
         when(userService.delete(userdto.getIdUser())).thenReturn(false);
         String idToDelete = "1035439688";
