@@ -141,4 +141,29 @@ class UserControllerTest {
         assertEquals(HttpStatus.CREATED.value(), code.value());
     }
 
+    @Test
+    public void shouldReturnStatusCode200WhenAnUserIsDeletedByItsId(){
+        //Arrange
+        when(userService.delete(userdto.getIdUser())).thenReturn(true);
+        String idToDelete = "1035439685";
+
+        //Act
+        HttpStatus code = userController.delete(idToDelete).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.OK.value(), code.value());
+    }
+
+    @Test
+    public void shouldReturnStatusCode404WhenAnUserIsNotFoundWhenIsDeletedByItsId(){
+        //Arrange
+        when(userService.delete(userdto.getIdUser())).thenReturn(false);
+        String idToDelete = "1035439688";
+
+        //Act
+        HttpStatus code = userController.delete(idToDelete).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
+    }
 }
