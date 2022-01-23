@@ -10,7 +10,7 @@ public interface PlaceRepository {
     List<PlaceDTO> getAll();
     Optional<PlaceDTO> getPlace(String idPlace);
     PlaceDTO save(PlaceDTO place);
-    void delete(String idPlace);
+    String delete(String idPlace);
 
 
 }

@@ -21,7 +21,7 @@ public interface InvitationMapper {
             @Mapping(source = "idInvitation.idPlace", target = "placeId")
     })
     InvitationDTO toInvitationDTO(Invitation invitation);
-    List<InvitationDTO> toUsersDTO(List<Invitation> invitations);
+    List<InvitationDTO> toInvitationsDTO(List<Invitation> invitations);
 
     @InheritInverseConfiguration
     @Mappings({
