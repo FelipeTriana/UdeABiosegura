@@ -3,13 +3,19 @@ package com.udea.biosegura.persistence.repository;
 import com.udea.biosegura.domain.dto.InvitationDTO;
 import com.udea.biosegura.domain.repository.InvitationRepository;
 import com.udea.biosegura.persistence.crud.InvitationCrudRepository;
+import com.udea.biosegura.persistence.entity.Invitation;
+import com.udea.biosegura.persistence.entity.InvitationPK;
 import com.udea.biosegura.persistence.mapper.InvitationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import com.udea.biosegura.persistence.repository.PlacePersistenceRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class InvitationPersistenceRepository implements InvitationRepository {
+
     @Autowired
     private InvitationCrudRepository invitationCrudRepository;
 
@@ -18,21 +24,26 @@ public class InvitationPersistenceRepository implements InvitationRepository {
 
     @Override
     public List<InvitationDTO> getAll() {
-        return null;
+        List<Invitation> invitations = (List<Invitation>) invitationCrudRepository.findAll(); //Ready
+        return mapper.toInvitationsDTO(invitations);
     }
 
     @Override
-    public Optional<InvitationDTO> getInvitation(String idInvitation) {
-        return Optional.empty();
+    public Optional<InvitationDTO> getInvitation(InvitationPK idInvitation) {
+        Optional<Invitation> invitation = invitationCrudRepository.findById(idInvitation);  //Ready
+        return  invitation.map(usr -> mapper.toInvitationDTO(usr));
     }
 
     @Override
-    public InvitationDTO save(InvitationDTO invitation) {
-        return null;
+    public InvitationDTO save(InvitationDTO invitationdto) {
+        Invitation invitation = mapper.toInvitation(invitationdto);
+        return mapper.toInvitationDTO(invitationCrudRepository.save(invitation));      //Ready
     }
 
     @Override
-    public void delete(String idInvitation) {
-
+    public String delete(InvitationPK idInvitation) {
+        invitationCrudRepository.deleteById(idInvitation);                       //Ready
+        System.out.println("Success");
+        return "Success";
     }
 }

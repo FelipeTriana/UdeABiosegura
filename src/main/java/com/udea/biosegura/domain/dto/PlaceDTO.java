@@ -9,7 +9,7 @@ public class PlaceDTO {
     private String phone;
     private String address;
     private int capacity;
-    //private List<InvitationDTO> invitations;
+    private List<InvitationDTO> invitations;
 
     public String getIdPlace() {
         return idPlace;
@@ -51,7 +51,7 @@ public class PlaceDTO {
         this.capacity = capacity;
     }
 
-    /*
+
     public List<InvitationDTO> getInvitations() {
         return invitations;
     }
@@ -59,5 +59,5 @@ public class PlaceDTO {
     public void setInvitations(List<InvitationDTO> invitations) {
         this.invitations = invitations;
     }
-     */
+
 }

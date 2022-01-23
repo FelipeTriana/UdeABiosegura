@@ -17,6 +17,7 @@ import java.util.List;
 public interface InvitationMapper {
 
     @Mappings({
+            //@Mapping(source = "idInvitation.id", target = "id"),
             @Mapping(source = "idInvitation.idUser", target = "userId"),
             @Mapping(source = "idInvitation.idPlace", target = "placeId")
     })
@@ -24,7 +25,7 @@ public interface InvitationMapper {
     List<InvitationDTO> toInvitationsDTO(List<Invitation> invitations);
 
     @InheritInverseConfiguration
-    @Mappings({
+   @Mappings({
             @Mapping(target = "user", ignore = true),
             @Mapping(target = "place", ignore = true)
     })

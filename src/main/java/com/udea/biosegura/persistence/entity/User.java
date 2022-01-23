@@ -10,7 +10,6 @@ public class User {
     @Id
     @Column(name = "id_user")
     private String idUser;
-
     private String name;
     private String phone;
     private String email;

@@ -21,7 +21,6 @@ public class UserPersistenceRepository implements UserRepository {
     private UserMapper mapper;
 
     @Override
-
     public List<UserDTO> getAll() {
         List<User> users = (List<User>) userCrudRepository.findAll(); //Ready
         return mapper.toUsersDTO(users);
@@ -30,7 +29,7 @@ public class UserPersistenceRepository implements UserRepository {
     @Override
     public Optional<UserDTO> getUser(String idUser) {
         Optional<User> user = userCrudRepository.findById(idUser);  //Ready
-        return  user.map(usr ->mapper.toUserDTO(usr));
+        return  user.map(usr -> mapper.toUserDTO(usr));
     }
 
     @Override
