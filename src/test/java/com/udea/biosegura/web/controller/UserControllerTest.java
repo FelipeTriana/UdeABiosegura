@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class UserControllerTest {
@@ -113,4 +114,31 @@ class UserControllerTest {
         //Assert
         assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
     }
+
+    @Test
+    public void shouldReturnTheCreatedUser(){
+        /* Must mock that any UserDTO object can be used to create a new one
+        * */
+        //Arrange
+        when(userService.save(any(UserDTO.class))).thenReturn(new UserDTO());
+
+        //Act
+        UserDTO createdUser = userController.save(new UserDTO()).getBody();
+
+        //Assert
+        assertNotNull(createdUser);
+    }
+
+    @Test
+    public void shouldReturnStatusCode201WhenAnUserIsCreated(){
+        //Arrange
+        when(userService.save(any(UserDTO.class))).thenReturn(new UserDTO());
+
+        //Act
+        HttpStatus code = userController.save(new UserDTO()).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.CREATED.value(), code.value());
+    }
+
 }
