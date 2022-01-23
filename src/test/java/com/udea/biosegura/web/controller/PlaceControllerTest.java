@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -56,5 +57,13 @@ class PlaceControllerTest {
 
         //Assert
         assertEquals(HttpStatus.OK.value(), code.value());
+    }
+
+    @Test
+    public void shouldReturnAPlaceWhenItsFoundByItsId(){
+        //Arrange
+        Optional<PlaceDTO> placeDTOOptional = Optional.of(placedto);
+        when(placeService.getPlace(placedto.getIdPlace())).thenReturn(placeDTOOptional);
+
     }
 }
