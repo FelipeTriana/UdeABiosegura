@@ -29,6 +29,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.mockito/mockito-core
 	testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
 
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
 
 }
 
