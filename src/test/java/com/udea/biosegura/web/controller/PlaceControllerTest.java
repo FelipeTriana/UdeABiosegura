@@ -2,6 +2,7 @@ package com.udea.biosegura.web.controller;
 
 import com.udea.biosegura.domain.dto.PlaceDTO;
 import com.udea.biosegura.domain.service.PlaceService;
+import com.udea.biosegura.persistence.entity.Place;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class PlaceControllerTest {
@@ -103,5 +105,28 @@ class PlaceControllerTest {
 
     }
 
+    @Test
+    public void shouldReturnTheCreatedPlace(){
+        //Arrange
+        when(placeService.save(any(PlaceDTO.class))).thenReturn(new PlaceDTO());
+
+        //Act
+        PlaceDTO place = placeController.save(new PlaceDTO()).getBody();
+
+        //Assert
+        assertNotNull(place);
+    }
+
+    @Test
+    public void shouldReturnStatusCode201WhenAPlaceIsCreated(){
+        //Arrange
+        when(placeService.save(any(PlaceDTO.class))).thenReturn(new PlaceDTO());
+
+        //Act
+        HttpStatus code = placeController.save(new PlaceDTO()).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.CREATED.value(), code.value());
+    }
 
 }
