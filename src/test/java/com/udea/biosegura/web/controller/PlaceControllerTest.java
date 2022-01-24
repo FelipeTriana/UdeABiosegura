@@ -129,4 +129,30 @@ class PlaceControllerTest {
         assertEquals(HttpStatus.CREATED.value(), code.value());
     }
 
+    @Test
+    public void shouldReturnStatusCode200WhenAPlaceItsDeletedByItsId(){
+        //Arrange
+        when(placeService.delete(placedto.getIdPlace())).thenReturn(true);
+        String idToDelete = "1";
+
+        //Act
+        HttpStatus code = placeController.delete(idToDelete).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.OK.value(), code.value());
+    }
+
+    @Test
+    public void shouldReturnStatusCode404IfAPlaceToDeleteIsNotFound(){
+        //Arrange
+        when(placeService.delete(placedto.getIdPlace())).thenReturn(false);
+        String idToDelete = "2";
+
+        //Act
+        HttpStatus code = placeController.delete(idToDelete).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
+    }
+
 }
