@@ -1,14 +1,15 @@
 package com.udea.biosegura.domain.dto;
 
+import com.udea.biosegura.persistence.entity.Place;
+
 public class InvitationDTO {
 
-    //private int id;
     private String userId;
     private String placeId;
     private String in_date;
     private String out_date;
-    //private PlaceDTO place;
-    //private UserDTO user;
+    private UserDTO user;
+    private PlaceDTO place;
 
     public String getUserId() {
         return userId;
@@ -42,28 +43,19 @@ public class InvitationDTO {
         this.out_date = out_date;
     }
 
-   /*public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }*/
-
-
-   /* public PlaceDTO getPlace() {
-        return place;
-    }
-
-    public void setPlace(PlaceDTO place) {
-        this.place = place;
-    }
-
     public UserDTO getUser() {
         return user;
     }
 
     public void setUser(UserDTO user) {
         this.user = user;
-    }*/
+    }
+
+    public PlaceDTO getPlace() {
+        return place;
+    }
+
+    public void setPlace(PlaceDTO place) {
+        this.place = place;
+    }
 }

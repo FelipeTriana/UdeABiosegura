@@ -8,7 +8,6 @@ import com.udea.biosegura.persistence.entity.InvitationPK;
 import com.udea.biosegura.persistence.mapper.InvitationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.udea.biosegura.persistence.repository.PlacePersistenceRepository;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,5 @@
 package com.udea.biosegura.domain.dto;
 
-import java.util.List;
 
 public class UserDTO {
 
@@ -9,7 +8,6 @@ public class UserDTO {
     private String phone;
     private String email;
     private String address;
-  //  private List<InvitationDTO> invitations;
 
     public String getIdUser() {
         return idUser;
@@ -50,13 +48,5 @@ public class UserDTO {
     public void setAddress(String address) {
         this.address = address;
     }
-/*
-    public List<InvitationDTO> getInvitations() {
-        return invitations;
-    }
 
-    public void setInvitations(List<InvitationDTO> invitations) {
-        this.invitations = invitations;
-    }
-    */
 }

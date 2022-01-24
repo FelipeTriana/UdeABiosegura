@@ -19,7 +19,7 @@ public interface PlaceMapper {
     List<PlaceDTO> toPlacesDTO(List<Place> places);
 
     @InheritInverseConfiguration
-    //@Mapping(target = "invitations", ignore = true)
+    @Mapping(target = "invitations", ignore = true)
     Place toPlace(PlaceDTO placedto);
 
 }
