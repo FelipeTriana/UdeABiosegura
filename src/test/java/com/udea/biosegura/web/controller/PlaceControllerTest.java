@@ -64,6 +64,44 @@ class PlaceControllerTest {
         //Arrange
         Optional<PlaceDTO> placeDTOOptional = Optional.of(placedto);
         when(placeService.getPlace(placedto.getIdPlace())).thenReturn(placeDTOOptional);
+        String idToSearch = "1";
+        String placeNameToCompare ="Auditorio";
+
+        //Act
+        PlaceDTO place = placeController.getPlace(idToSearch).getBody();
+
+        //Assert
+        assertEquals(placeNameToCompare, place.getNamePlace());
+    }
+
+    @Test
+    public void shouldReturnStatusCode200WhenAPlaceItsFoundByItsId(){
+        //Arrange
+        Optional<PlaceDTO> placeDTOOptional = Optional.of(placedto);
+        when(placeService.getPlace(placedto.getIdPlace())).thenReturn(placeDTOOptional);
+        String idToSearch = "1";
+
+        //Act
+        HttpStatus code = placeController.getPlace(idToSearch).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.OK.value(), code.value());
+    }
+
+    @Test
+    public void shouldReturnStatusCode404WhenAPlaceIsNotFoundByItsId(){
+        //Arrange
+        Optional<PlaceDTO> placeDTOOptional = Optional.of(placedto);
+        when(placeService.getPlace(placedto.getIdPlace())).thenReturn(placeDTOOptional);
+        String idToSearch = "2";
+
+        //Act
+        HttpStatus code = placeController.getPlace(idToSearch).getStatusCode();
+
+        //Assert
+        assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
 
     }
+
+
 }

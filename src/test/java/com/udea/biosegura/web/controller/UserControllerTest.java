@@ -76,10 +76,10 @@ class UserControllerTest {
         when(userService.getUser(userdto.getIdUser())).thenReturn(userDTOOptional);
 
         String emailToCompare = "mateo.baena@udea.edu.co";
-        String idToFound = "1035439685";
+        String idToSearch = "1035439685";
 
         //Act
-        UserDTO foundUser = userController.getUser(idToFound).getBody();
+        UserDTO foundUser = userController.getUser(idToSearch).getBody();
 
         //Assert
         assertEquals(emailToCompare,foundUser.getEmail());
@@ -91,10 +91,10 @@ class UserControllerTest {
         Optional<UserDTO> userDTOOptional = Optional.of(userdto);
         when(userService.getUser(userdto.getIdUser())).thenReturn(userDTOOptional);
 
-        String idToFound = "1035439685";
+        String idToSearch = "1035439685";
 
         //Act
-        HttpStatus code = userController.getUser(idToFound).getStatusCode();
+        HttpStatus code = userController.getUser(idToSearch).getStatusCode();
 
         //Assert
         assertEquals(HttpStatus.OK.value(), code.value());
@@ -106,10 +106,10 @@ class UserControllerTest {
         Optional<UserDTO> userDTOOptional = Optional.of(userdto);
         when(userService.getUser(userdto.getIdUser())).thenReturn(userDTOOptional);
 
-        String idToFound = "1035439689";
+        String idToSearch = "1035439689";
 
         //Act
-        HttpStatus code = userController.getUser(idToFound).getStatusCode();
+        HttpStatus code = userController.getUser(idToSearch).getStatusCode();
 
         //Assert
         assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
