@@ -2,6 +2,7 @@ package com.udea.biosegura.web.controller;
 
 import com.udea.biosegura.domain.dto.InvitationDTO;
 import com.udea.biosegura.domain.service.InvitationService;
+import com.udea.biosegura.models.InvitationInput;
 import com.udea.biosegura.persistence.entity.InvitationPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class InvitationController {
     }
 
     @GetMapping("/{idInvitation}")
-    public ResponseEntity<InvitationDTO> getUser(@PathVariable("idInvitation") InvitationPK id) {
+    public ResponseEntity<InvitationDTO> getInvitation(@PathVariable("idInvitation") InvitationPK id) {
         return invitationService.getInvitation(id)
                 .map(inv-> new ResponseEntity<>(inv, HttpStatus.OK))
                 .orElse(new ResponseEntity("404 not found",HttpStatus.NOT_FOUND)); //Se quito <>
@@ -42,5 +43,4 @@ public class InvitationController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
-
 }
