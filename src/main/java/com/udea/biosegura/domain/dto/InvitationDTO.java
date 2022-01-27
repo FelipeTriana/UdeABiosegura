@@ -1,7 +1,8 @@
 package com.udea.biosegura.domain.dto;
 
-import com.udea.biosegura.persistence.entity.Place;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class InvitationDTO {
 
     private String userId;
@@ -10,6 +11,13 @@ public class InvitationDTO {
     private String out_date;
     private UserDTO user;
     private PlaceDTO place;
+
+    public InvitationDTO(String userId, String placeId, String in_date, String out_date) {
+        this.userId = userId;
+        this.placeId = placeId;
+        this.in_date = in_date;
+        this.out_date = out_date;
+    }
 
     public String getUserId() {
         return userId;

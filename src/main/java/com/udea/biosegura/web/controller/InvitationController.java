@@ -2,7 +2,7 @@ package com.udea.biosegura.web.controller;
 
 import com.udea.biosegura.domain.dto.InvitationDTO;
 import com.udea.biosegura.domain.service.InvitationService;
-import com.udea.biosegura.models.InvitationInput;
+import com.udea.biosegura.models.CreateInvitationInput;
 import com.udea.biosegura.persistence.entity.InvitationPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,15 @@ public class InvitationController {
     }
 
     @PostMapping()
-    public ResponseEntity<InvitationDTO> save(@RequestBody InvitationDTO invitationdto) {
+    public ResponseEntity<InvitationDTO> save(@RequestBody CreateInvitationInput input) {
+
+        String userId = input.getUserId();
+        String placeId = input.getPlaceId();
+        String inDate= input.getInDate();
+        String outDate = input.getOutDate();
+
+        InvitationDTO invitationdto = new InvitationDTO(userId, placeId, inDate, outDate);
+
         return new ResponseEntity<>(invitationService.save(invitationdto), HttpStatus.CREATED);
     }
 
