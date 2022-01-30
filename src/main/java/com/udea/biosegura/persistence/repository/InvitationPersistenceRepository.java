@@ -28,8 +28,8 @@ public class InvitationPersistenceRepository implements InvitationRepository {
     }
 
     @Override
-    public Optional<InvitationDTO> getInvitation(InvitationPK idInvitation) {
-        Optional<Invitation> invitation = invitationCrudRepository.findById(idInvitation);  //Ready
+    public Optional<InvitationDTO> getInvitation(Integer idInvitation) {
+        Optional<Invitation> invitation = invitationCrudRepository.findByIdInvitation(idInvitation);  //Ready
         return  invitation.map(usr -> mapper.toInvitationDTO(usr));
     }
 
@@ -40,9 +40,26 @@ public class InvitationPersistenceRepository implements InvitationRepository {
     }
 
     @Override
-    public String delete(InvitationPK idInvitation) {
-        invitationCrudRepository.deleteById(idInvitation);                       //Ready
+    public String deleteByUser(String userid) {
+        invitationCrudRepository.deleteByUser(userid);                 //Ready
         System.out.println("Success");
         return "Success";
     }
+
+    @Override
+    public String deleteByPlace(String placeid) {
+        invitationCrudRepository.deleteByPlace(placeid);                 //Ready
+        System.out.println("Success");
+        return "Success";
+    }
+
+    @Override
+    public String delete(Integer invitation) {
+        invitationCrudRepository.deleteByIdInvitation(invitation);                 //Ready
+        System.out.println("Success");
+        return "Success";
+    }
+
+
+
 }

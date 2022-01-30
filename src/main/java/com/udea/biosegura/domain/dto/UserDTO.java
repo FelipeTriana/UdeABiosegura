@@ -1,6 +1,5 @@
 package com.udea.biosegura.domain.dto;
 
-
 public class UserDTO {
 
     private String idUser;
