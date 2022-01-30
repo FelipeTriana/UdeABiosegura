@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InvitationDTO {
 
+    private Integer invitationId;
     private String userId;
     private String placeId;
     private String in_date;
@@ -12,7 +13,8 @@ public class InvitationDTO {
     private UserDTO user;
     private PlaceDTO place;
 
-    public InvitationDTO(String userId, String placeId, String in_date, String out_date) {
+    public InvitationDTO(String userId, String placeId, String in_date, String out_date, Integer invitationId) {
+        this.invitationId = invitationId;
         this.userId = userId;
         this.placeId = placeId;
         this.in_date = in_date;
@@ -65,5 +67,13 @@ public class InvitationDTO {
 
     public void setPlace(PlaceDTO place) {
         this.place = place;
+    }
+
+    public Integer getInvitationId() {
+        return invitationId;
+    }
+
+    public void setInvitationId(Integer invitationId) {
+        this.invitationId = invitationId;
     }
 }

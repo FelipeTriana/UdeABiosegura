@@ -15,8 +15,9 @@ import java.util.List;
 public interface InvitationMapper {
 
     @Mappings({
-            @Mapping(source = "idInvitation.idUser", target = "userId"),
-            @Mapping(source = "idInvitation.idPlace", target = "placeId")
+            @Mapping(source = "id.invitation", target = "invitationId"),
+            @Mapping(source = "id.userid", target = "userId"),
+            @Mapping(source = "id.placeid", target = "placeId")
     })
     InvitationDTO toInvitationDTO(Invitation invitation);
     List<InvitationDTO> toInvitationsDTO(List<Invitation> invitations);

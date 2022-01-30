@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Invitation {
 
     @EmbeddedId   //Composite primary key
-    private InvitationPK idInvitation;
+    private InvitationPK id;
 
     private String in_date;
     private String out_date;
@@ -23,12 +23,12 @@ public class Invitation {
     @JoinColumn(name = "id_place", insertable = false, updatable = false)
     private Place place;
 
-    public InvitationPK getIdInvitation() {
-        return idInvitation;
+    public InvitationPK getId() {
+        return id;
     }
 
-    public void setIdInvitation(InvitationPK idInvitation) {
-        this.idInvitation = idInvitation;
+    public void setId(InvitationPK id) {
+        this.id = id;
     }
 
     public String getIn_date() {

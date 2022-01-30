@@ -10,9 +10,12 @@ import java.util.Optional;
 public interface InvitationRepository {
 
     List<InvitationDTO> getAll();
-    Optional<InvitationDTO> getInvitation(InvitationPK idInvitation);
+    Optional<InvitationDTO> getInvitation(Integer idInvitation);
     InvitationDTO save(InvitationDTO invitationdto);
-    String delete(InvitationPK idInvitation);
+    String deleteByUser(String userid);
+    String deleteByPlace(String placeid);
+    String delete(Integer idInvitation);
+
 
 
 }

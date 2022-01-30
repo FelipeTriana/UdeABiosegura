@@ -24,28 +24,38 @@ public class InvitationController {
     }
 
     @GetMapping("/{idInvitation}")
-    public ResponseEntity<InvitationDTO> getInvitation(@PathVariable("idInvitation") InvitationPK id) {
+    public ResponseEntity<InvitationDTO> getInvitation(@PathVariable("idInvitation") Integer id) {
         return invitationService.getInvitation(id)
                 .map(inv-> new ResponseEntity<>(inv, HttpStatus.OK))
                 .orElse(new ResponseEntity("404 not found",HttpStatus.NOT_FOUND)); //Se quito <>
     }
 
     @PostMapping()
-    public ResponseEntity<InvitationDTO> save(@RequestBody CreateInvitationInput input) {
-
-        String userId = input.getUserId();
-        String placeId = input.getPlaceId();
-        String inDate= input.getInDate();
-        String outDate = input.getOutDate();
-
-        InvitationDTO invitationdto = new InvitationDTO(userId, placeId, inDate, outDate);
-
+    public ResponseEntity<InvitationDTO> save(@RequestBody InvitationDTO invitationdto) {
         return new ResponseEntity<>(invitationService.save(invitationdto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{idInvitation}")
-    public ResponseEntity<InvitationDTO> delete(@PathVariable("idInvitation") InvitationPK id) {
+    public ResponseEntity<InvitationDTO> delete(@PathVariable("idInvitation") Integer id) {
         if (invitationService.delete(id)) {
+            return new ResponseEntity("Delete Successfuly",HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("byuser/{userid}")
+    public ResponseEntity<InvitationDTO> deleteByUser(@PathVariable("userid") String id) {
+        if (invitationService.deleteByUser(id)) {
+            return new ResponseEntity("Delete Successfuly",HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("byplace/{placeid}")
+    public ResponseEntity<InvitationDTO> deleteByPlace(@PathVariable("placeid") String id) {
+        if (invitationService.deleteByPlace(id)) {
             return new ResponseEntity("Delete Successfuly",HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);

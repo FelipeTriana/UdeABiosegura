@@ -8,8 +8,11 @@ import com.udea.biosegura.domain.repository.PlaceRepository;
 import com.udea.biosegura.domain.repository.UserRepository;
 import com.udea.biosegura.persistence.entity.InvitationPK;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,25 +30,10 @@ public class InvitationService {
 
     public List<InvitationDTO> getAll(){return invitationRepository.getAll();}
 
-    public Optional<InvitationDTO> getInvitation(InvitationPK idInvitation){return invitationRepository.getInvitation(idInvitation);}
+    public Optional<InvitationDTO> getInvitation(Integer idInvitation){return invitationRepository.getInvitation(idInvitation);}
 
     public InvitationDTO save(InvitationDTO invitationdto){
-        /* Se agenda una visita
-        *
-        *  Un user asistira a un place en una hora_in hasta hora_out
-        *
-        *  Se carga el place a actualizar
-        *
-        *  El place debe reducir su capacidad en 1 (SI place.capacidad > 0)
-        *
-        *  Si place.capacidad == 0 -> Rechazo de invitacion
-        *
-        *  Actualizar el place en BD
-        *
-        *  Asignar el place al invitationDTO
-        * */
 
-        //Obtenemos los objetos que corresponden a las Ids asociadas a la invitation
         UserDTO foundUser = userRepository.getUser(invitationdto.getUserId()).get();
         PlaceDTO foundPlace = placeRepository.getPlace(invitationdto.getPlaceId()).get();
 
@@ -63,10 +51,25 @@ public class InvitationService {
         }
     }
 
-    public boolean delete(InvitationPK idInvitation){
+    public boolean delete(Integer idInvitation){
         return getInvitation(idInvitation).map(inv -> {
             invitationRepository.delete(idInvitation);
             return true;
         }).orElse(false);
     }
+
+    public boolean deleteByUser(String userid){
+        return userRepository.getUser(userid).map(inv -> {
+            invitationRepository.deleteByUser(userid);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean deleteByPlace(String placeid){
+        return placeRepository.getPlace(placeid).map(inv -> {
+            invitationRepository.deleteByPlace(placeid);
+            return true;
+        }).orElse(false);
+    }
+
 }
