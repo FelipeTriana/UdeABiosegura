@@ -2,23 +2,28 @@ package com.udea.biosegura.domain.dto;
 
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @NoArgsConstructor
 public class InvitationDTO {
 
     private Integer invitationId;
     private String userId;
     private String placeId;
-    private String in_date;
-    private String out_date;
+    private Date inDate;
+    private Date outDate;
     private UserDTO user;
     private PlaceDTO place;
 
-    public InvitationDTO(String userId, String placeId, String in_date, String out_date, Integer invitationId) {
+    public InvitationDTO() {
+    }
+
+    public InvitationDTO(String userId, String placeId, Date inDate, Date outDate, Integer invitationId) {
         this.invitationId = invitationId;
         this.userId = userId;
         this.placeId = placeId;
-        this.in_date = in_date;
-        this.out_date = out_date;
+        this.inDate = inDate;
+        this.outDate = outDate;
     }
 
     public String getUserId() {
@@ -37,20 +42,20 @@ public class InvitationDTO {
         this.placeId = placeId;
     }
 
-    public String getIn_date() {
-        return in_date;
+    public Date getInDate() {
+        return inDate;
     }
 
-    public void setIn_date(String in_date) {
-        this.in_date = in_date;
+    public void setInDate(Date inDate) {
+        this.inDate = inDate;
     }
 
-    public String getOut_date() {
-        return out_date;
+    public Date getOutDate() {
+        return outDate;
     }
 
-    public void setOut_date(String out_date) {
-        this.out_date = out_date;
+    public void setOutDate(Date outDate) {
+        this.outDate = outDate;
     }
 
     public UserDTO getUser() {

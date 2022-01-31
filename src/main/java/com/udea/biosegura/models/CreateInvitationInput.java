@@ -1,6 +1,7 @@
 package com.udea.biosegura.models;
 
 public class CreateInvitationInput {
+    private Integer invitationId;
     private String userId;
     private String placeId;
     private String inDate;
@@ -10,11 +11,20 @@ public class CreateInvitationInput {
 
     }
 
-    public CreateInvitationInput(String userId, String placeId, String inDate, String outDate) {
+    public CreateInvitationInput(Integer invitationId,String userId, String placeId, String inDate, String outDate) {
+        this.invitationId = invitationId;
         this.userId = userId;
         this.placeId = placeId;
         this.inDate = inDate;
         this.outDate = outDate;
+    }
+
+    public Integer getInvitationId() {
+        return invitationId;
+    }
+
+    public void setInvitationId(Integer invitationId) {
+        this.invitationId = invitationId;
     }
 
     public String getUserId() {
