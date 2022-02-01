@@ -6,6 +6,7 @@ import com.udea.biosegura.domain.dto.UserDTO;
 import com.udea.biosegura.domain.repository.InvitationRepository;
 import com.udea.biosegura.domain.repository.PlaceRepository;
 import com.udea.biosegura.domain.repository.UserRepository;
+import com.udea.biosegura.persistence.entity.Invitation;
 import com.udea.biosegura.persistence.entity.InvitationPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,19 +32,28 @@ public class InvitationService {
 
     public List<InvitationDTO> getAll(){return invitationRepository.getAll();}
 
-    public Optional<InvitationDTO> getInvitation(Integer idInvitation){return invitationRepository.getInvitation(idInvitation);}
+    public Optional<InvitationDTO> getInvitation(Integer invitationId){return invitationRepository.getInvitation(invitationId);}
 
     public InvitationDTO save(InvitationDTO invitationdto){
 
         UserDTO foundUser = userRepository.getUser(invitationdto.getUserId()).get();
         PlaceDTO foundPlace = placeRepository.getPlace(invitationdto.getPlaceId()).get();
+        List<InvitationDTO> currentElements = invitationRepository.getAll();
+
+        if(currentElements.equals(Collections.emptyList())){
+            Integer iterable = 1;
+            invitationdto.setInvitationId(iterable);
+        }else{
+            InvitationDTO lastElement = currentElements.get(currentElements.size() - 1);
+            invitationdto.setInvitationId(lastElement.getInvitationId()+1);
+        }
 
         //Asignamos los objetos user y place a los atributos nulos del invitationDTO
         invitationdto.setUser(foundUser);
         invitationdto.setPlace(foundPlace);
 
-        if(foundPlace.getCapacity() > 0){
-            foundPlace.setCapacity(foundPlace.getCapacity() - 1); //Reducimos capacidad del lugar
+        if(foundPlace.getActualCapacity() > 0){
+            foundPlace.setActualCapacity(foundPlace.getActualCapacity() - 1); //Reducimos capacidad del lugar
             placeRepository.save(foundPlace);
             invitationdto.setPlace(foundPlace); //Reemplazamos el place con el actualizado
             return invitationRepository.save(invitationdto);
@@ -51,23 +62,70 @@ public class InvitationService {
         }
     }
 
-    public boolean delete(Integer idInvitation){
-        return getInvitation(idInvitation).map(inv -> {
-            invitationRepository.delete(idInvitation);
+    public boolean delete(Integer invitationId){
+
+        InvitationDTO foundInvitation = invitationRepository.getInvitation(invitationId).get();
+        PlaceDTO relatedPlace = placeRepository.getPlace(foundInvitation.getPlaceId()).get();
+
+        if(relatedPlace.getActualCapacity() > relatedPlace.getCapacity()){
+            throw new IllegalArgumentException("The place  actual capacity can not be greater than the total capacity");
+        } else {
+            relatedPlace.setActualCapacity( relatedPlace.getActualCapacity() + 1);
+            placeRepository.save(relatedPlace);
+        }
+
+        return getInvitation(invitationId).map(inv -> {
+            invitationRepository.delete(invitationId);
             return true;
         }).orElse(false);
     }
 
-    public boolean deleteByUser(String userid){
-        return userRepository.getUser(userid).map(inv -> {
-            invitationRepository.deleteByUser(userid);
+    public boolean deleteByUser(String userId){
+
+        List<InvitationDTO> currentInvitations = invitationRepository.getAll();
+
+        InvitationDTO foundInvitation = currentInvitations.
+                stream().
+                filter(invitation -> invitation.getUserId().equals(userId)).
+                findAny().
+                get();
+
+        PlaceDTO foundPlace = foundInvitation.getPlace();
+
+        if(foundPlace.getActualCapacity() > foundPlace.getCapacity()){
+            throw new IllegalArgumentException("The place  actual capacity can not be greater than the total capacity");
+        } else {
+            foundPlace.setActualCapacity( foundPlace.getActualCapacity() + 1);
+            placeRepository.save(foundPlace);
+        }
+
+        return userRepository.getUser(userId).map(inv -> {
+            invitationRepository.deleteByUser(userId);
             return true;
         }).orElse(false);
     }
 
-    public boolean deleteByPlace(String placeid){
-        return placeRepository.getPlace(placeid).map(inv -> {
-            invitationRepository.deleteByPlace(placeid);
+    public boolean deleteByPlace(String placeId){
+
+        List<InvitationDTO> currentInvitations = invitationRepository.getAll();
+
+        InvitationDTO foundInvitation = currentInvitations.
+                stream().
+                filter(invitation -> invitation.getPlaceId().equals(placeId)).
+                findAny().
+                get();
+
+        PlaceDTO foundPlace = foundInvitation.getPlace();
+
+        if(foundPlace.getActualCapacity() > foundPlace.getCapacity()){
+            throw new IllegalArgumentException("The place  actual capacity can not be greater than the total capacity");
+        } else {
+            foundPlace.setActualCapacity( foundPlace.getActualCapacity() + 1);
+            placeRepository.save(foundPlace);
+        }
+
+        return placeRepository.getPlace(placeId).map(inv -> {
+            invitationRepository.deleteByPlace(placeId);
             return true;
         }).orElse(false);
     }

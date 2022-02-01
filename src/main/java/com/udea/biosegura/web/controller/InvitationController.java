@@ -35,14 +35,14 @@ public class InvitationController {
     @GetMapping("/{idInvitation}")
     public ResponseEntity<InvitationDTO> getInvitation(@PathVariable("idInvitation") Integer id) {
         return invitationService.getInvitation(id)
-                .map(inv-> new ResponseEntity<>(inv, HttpStatus.OK))
-                .orElse(new ResponseEntity("404 not found",HttpStatus.NOT_FOUND)); //Se quito <>
+                .map(inv -> new ResponseEntity<>(inv, HttpStatus.OK))
+                .orElse(new ResponseEntity("404 not found", HttpStatus.NOT_FOUND)); //Se quito <>
     }
 
     @PostMapping()
     public ResponseEntity<InvitationDTO> save(@RequestBody CreateInvitationInput invitationInput) {
         InvitationDTO invitationdto = new InvitationDTO();  //Es bueno instanciar así? no viola inyeccion de dependencias?
-        invitationdto.setInvitationId(invitationInput.getInvitationId());
+        //invitationdto.setInvitationId(invitationInput.getInvitationId());
         invitationdto.setUserId(invitationInput.getUserId());
         invitationdto.setPlaceId(invitationInput.getPlaceId());
         try {
@@ -57,20 +57,22 @@ public class InvitationController {
                 return new ResponseEntity<>(invitationService.save(invitationdto), HttpStatus.CREATED);
             } else {
                 return new ResponseEntity("400 Bad Request: Las fechas ingresadas no concuerdan " +
-                        "entre si o con la fecha actual del sistema",HttpStatus.BAD_REQUEST);
+                        "entre si o con la fecha actual del sistema", HttpStatus.BAD_REQUEST);
             }
         } catch (ParseException ex) {
             Logger.getLogger(Pruebita.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity("400 Bad Request: El formato de " +
-                    "fecha ingresado no es valido",HttpStatus.BAD_REQUEST);
+                    "fecha ingresado no es valido", HttpStatus.BAD_REQUEST);
         }
+
+
         //return new ResponseEntity<>(invitationService.save(invitationdto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{idInvitation}")
     public ResponseEntity<InvitationDTO> delete(@PathVariable("idInvitation") Integer id) {
         if (invitationService.delete(id)) {
-            return new ResponseEntity("Delete Successfuly",HttpStatus.OK);
+            return new ResponseEntity("Delete Successfuly", HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
@@ -79,7 +81,7 @@ public class InvitationController {
     @DeleteMapping("byuser/{userid}")
     public ResponseEntity<InvitationDTO> deleteByUser(@PathVariable("userid") String id) {
         if (invitationService.deleteByUser(id)) {
-            return new ResponseEntity("Delete Successfuly",HttpStatus.OK);
+            return new ResponseEntity("Delete Successfuly", HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
@@ -88,7 +90,7 @@ public class InvitationController {
     @DeleteMapping("byplace/{placeid}")
     public ResponseEntity<InvitationDTO> deleteByPlace(@PathVariable("placeid") String id) {
         if (invitationService.deleteByPlace(id)) {
-            return new ResponseEntity("Delete Successfuly",HttpStatus.OK);
+            return new ResponseEntity("Delete Successfuly", HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }

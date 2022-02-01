@@ -1,10 +1,7 @@
 package com.udea.biosegura.domain.dto;
 
-import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
-@NoArgsConstructor
 public class InvitationDTO {
 
     private Integer invitationId;

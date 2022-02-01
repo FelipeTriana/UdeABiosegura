@@ -15,7 +15,7 @@ public class InvitationPK implements Serializable {
     @Column(name = "id_user")
     private String userid;
 
-    @GeneratedValue(strategy = GenerationType.TABLE)  //Problema aquí, se esta mapeando desde el dominion y si no lo definimos le lleva un nulo
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  //Problema aquí, se esta mapeando desde el dominion y si no lo definimos le lleva un nulo
     @Column(name = "id_invitation")
     private Integer invitation;
 
@@ -35,11 +35,11 @@ public class InvitationPK implements Serializable {
         this.userid = userid;
     }
 
-    public Integer getInvitation() {
+    public Integer getInvitationid() {
         return invitation;
     }
 
-    public void setInvitation(Integer invitation) {
-        this.invitation = invitation;
+    public void setInvitationid(Integer invitationId) {
+        this.invitation = invitationId;
     }
 }

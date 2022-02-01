@@ -8,6 +8,7 @@ public class PlaceDTO {
     private String phone;
     private String address;
     private int capacity;
+    private int actualCapacity;
 
     public String getIdPlace() {
         return idPlace;
@@ -49,5 +50,11 @@ public class PlaceDTO {
         this.capacity = capacity;
     }
 
+    public int getActualCapacity() {
+        return actualCapacity;
+    }
 
+    public void setActualCapacity(int actualCapacity) {
+        this.actualCapacity = actualCapacity;
+    }
 }

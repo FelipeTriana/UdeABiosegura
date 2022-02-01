@@ -15,7 +15,7 @@ import java.util.List;
 public interface InvitationMapper {
 
     @Mappings({
-            @Mapping(source = "id.invitation", target = "invitationId"),
+            @Mapping(source = "id.invitationid", target = "invitationId"),
             @Mapping(source = "id.userid", target = "userId"),
             @Mapping(source = "id.placeid", target = "placeId")
     })

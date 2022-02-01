@@ -16,6 +16,7 @@ public class Place {
     private String phone;
     private String address;
     private int capacity;
+    private int actualCapacity;
 
     @OneToMany(mappedBy = "place",  cascade = {CascadeType.ALL})
     private List<Invitation> invitations;
@@ -66,5 +67,13 @@ public class Place {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public int getActualCapacity() {
+        return actualCapacity;
+    }
+
+    public void setActualCapacity(int actualCapacity) {
+        this.actualCapacity = actualCapacity;
     }
 }

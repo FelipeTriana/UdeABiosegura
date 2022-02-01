@@ -27,5 +27,5 @@ public interface InvitationCrudRepository extends CrudRepository<Invitation, Inv
     @Query(value = "delete from invitations i where i.id_place = ?", nativeQuery = true)
     void deleteByPlace(String placeid);
 
-    Optional<Invitation> findByIdInvitation(Integer invitation);
+    Optional<Invitation> findByIdInvitation(Integer invitationId);
 }
