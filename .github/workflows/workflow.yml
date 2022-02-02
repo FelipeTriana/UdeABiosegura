@@ -1,0 +1,26 @@
+name: CI for the Biosegura project
+
+# Controles que se tienen en cuenta cuando el workflow corre
+on:
+  # Activa el workflow con un push (tambien se puede pull request) a una rama
+  push:
+    branches:
+      - development
+
+  #Permite que este workflow se pueda correr tambien manualmente desde github (en la seccion Actions)
+  workflow_dispatch:
+
+# Aquellas acciones que ejecutara nuestro workflow
+jobs:
+  # El nombre de un job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # El cual revisa nuestro repo dentro del workspace de github para que el job lo acceda
+      - uses: actions/checkout@v2
+      # Podemos darle nombres a nuestros pasos y luego asignarle un comando que lo corra
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - run: gradle bootRun
