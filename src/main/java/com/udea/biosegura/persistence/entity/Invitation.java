@@ -11,8 +11,8 @@ public class Invitation {
     @EmbeddedId   //Composite primary key
     private InvitationPK id;
 
-    private Date inDate;
-    private Date outDate;
+    private String inDate;
+    private String outDate;
 
     @ManyToOne
     @MapsId("idUser")
@@ -32,19 +32,19 @@ public class Invitation {
         this.id = id;
     }
 
-    public Date getInDate() {
+    public String getInDate() {
         return inDate;
     }
 
-    public void setInDate(Date inDate) {
+    public void setInDate(String inDate) {
         this.inDate = inDate;
     }
 
-    public Date getOutDate() {
+    public String getOutDate() {
         return outDate;
     }
 
-    public void setOutDate(Date outDate) {
+    public void setOutDate(String outDate) {
         this.outDate = outDate;
     }
 

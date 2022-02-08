@@ -34,9 +34,11 @@ public class InvitationService {
 
     public Optional<InvitationDTO> getInvitation(Integer invitationId){return invitationRepository.getInvitation(invitationId);}
 
+    //public Optional<List<InvitationDTO>> getInvitationByDate(String date){return invitationRepository.getInvitationByDate(date);}
+
     public InvitationDTO save(InvitationDTO invitationdto){
 
-        UserDTO foundUser = userRepository.getUser(invitationdto.getUserId()).get();
+        UserDTO foundUser = userRepository.getUser(invitationdto.getUserId()).get(); //Con .get() lo saca del Optional?
         PlaceDTO foundPlace = placeRepository.getPlace(invitationdto.getPlaceId()).get();
         List<InvitationDTO> currentElements = invitationRepository.getAll();
 
@@ -80,30 +82,6 @@ public class InvitationService {
         }).orElse(false);
     }
 
-    public boolean deleteByUser(String userId){
-
-        List<InvitationDTO> currentInvitations = invitationRepository.getAll();
-
-        InvitationDTO foundInvitation = currentInvitations.
-                stream().
-                filter(invitation -> invitation.getUserId().equals(userId)).
-                findAny().
-                get();
-
-        PlaceDTO foundPlace = foundInvitation.getPlace();
-
-        if(foundPlace.getActualCapacity() > foundPlace.getCapacity()){
-            throw new IllegalArgumentException("The place  actual capacity can not be greater than the total capacity");
-        } else {
-            foundPlace.setActualCapacity( foundPlace.getActualCapacity() + 1);
-            placeRepository.save(foundPlace);
-        }
-
-        return userRepository.getUser(userId).map(inv -> {
-            invitationRepository.deleteByUser(userId);
-            return true;
-        }).orElse(false);
-    }
 
     public boolean deleteByPlace(String placeId){
 
@@ -129,5 +107,7 @@ public class InvitationService {
             return true;
         }).orElse(false);
     }
+
+
 
 }

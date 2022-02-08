@@ -39,12 +39,6 @@ public class InvitationPersistenceRepository implements InvitationRepository {
         return mapper.toInvitationDTO(invitationCrudRepository.save(invitation));      //Ready
     }
 
-    @Override
-    public String deleteByUser(String userid) {
-        invitationCrudRepository.deleteByUser(userid);                 //Ready
-        System.out.println("Success");
-        return "Success";
-    }
 
     @Override
     public String deleteByPlace(String placeid) {
@@ -54,12 +48,22 @@ public class InvitationPersistenceRepository implements InvitationRepository {
     }
 
     @Override
+    public int deleteByDate(String date) {
+        return invitationCrudRepository.deleteByDate(date);
+    }
+
+    @Override
     public String delete(Integer invitation) {
         invitationCrudRepository.deleteByIdInvitation(invitation);                 //Ready
         System.out.println("Success");
         return "Success";
     }
 
-
+    /*@Override
+    public Optional<List<InvitationDTO>> getInvitationByDate(String date) {
+        List<Invitation> invitations = invitationCrudRepository.findByOutDate(date);
+        List<InvitationDTO> invitationsdto = mapper.toInvitationsDTO(invitations);
+        return Optional.of(invitationsdto);
+            }*/
 
 }

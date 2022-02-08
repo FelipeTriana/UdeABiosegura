@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,13 +20,15 @@ public interface InvitationCrudRepository extends CrudRepository<Invitation, Inv
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "delete from invitations i where i.id_user = ?", nativeQuery = true)
-    void deleteByUser(String userid);
+    @Query(value = "delete from invitations i where i.id_place = ?", nativeQuery = true)
+    int deleteByPlace(String placeid);
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "delete from invitations i where i.id_place = ?", nativeQuery = true)
-    void deleteByPlace(String placeid);
+    @Query(value = "delete from invitations i where i.outDate = ?", nativeQuery = true)
+    int deleteByDate(String date);
 
     Optional<Invitation> findByIdInvitation(Integer invitationId);
+
+    List<Invitation> findByOutDate(String Date);  //Revisar
 }
