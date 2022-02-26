@@ -15,12 +15,29 @@ jobs:
   # El nombre de un job
   build:
     runs-on: ubuntu-latest
-    steps:
+   # steps:
       # El cual revisa nuestro repo dentro del workspace de github para que el job lo acceda
-      - uses: actions/checkout@v2
+    #  - uses: actions/checkout@v2
       # Podemos darle nombres a nuestros pasos y luego asignarle un comando que lo corra
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+     # - name: Set up JDK
+      #  uses: actions/setup-java@v1
+       # with:
+        #  java-version: 11
+      #- run: ./gradlew clean test --info
+      
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
         with:
-          java-version: 11
-      - run: ./gradlew clean test --info
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
+        with:
+          arguments: build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: build/libs
