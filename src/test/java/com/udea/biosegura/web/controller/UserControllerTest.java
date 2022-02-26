@@ -151,7 +151,8 @@ class UserControllerTest {
         HttpStatus code = userController.delete(idToDelete).getStatusCode();
 
         //Assert
-        assertEquals(HttpStatus.OK.value(), 1);
+        assertEquals(HttpStatus.OK.value(), code.value());
+
     }
 
     @Test
