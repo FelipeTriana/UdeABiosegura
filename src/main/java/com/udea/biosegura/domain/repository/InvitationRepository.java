@@ -11,10 +11,11 @@ public interface InvitationRepository {
 
     List<InvitationDTO> getAll();
     Optional<InvitationDTO> getInvitation(Integer invitationId);
+    //Optional<List<InvitationDTO>> getInvitationByDate(String date);
     InvitationDTO save(InvitationDTO invitationdto);
-    String deleteByUser(String userid);
     String deleteByPlace(String placeid);
     String delete(Integer invitationId);
+    int deleteByDate(String placeid);
 
 
 
