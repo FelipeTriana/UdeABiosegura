@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "27443046-7383-490b-9b53-4c86d0afbae7",
+		"name": "UdeABiosegura",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/users",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUser\": \"16\",\r\n    \"name\": \"other\",\r\n    \"phone\": \"3193662132\",\r\n    \"email\": \"felipetrianago@gmail.com\",\r\n    \"address\": \"Diagonal 987\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/users",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/users/13",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/users/123",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Places",
+			"item": [
+				{
+					"name": "Get All Places",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/places",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Place",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/places/1",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"places",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Place",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idPlace\": \"10\",\r\n        \"namePlace\": \"LIS\",\r\n        \"phone\": \"456\",\r\n        \"address\": \"Bloque 18\",\r\n        \"capacity\": 3,\r\n        \"actualCapacity\": 3\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/places",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Place",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/places/9",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"places",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invitations",
+			"item": [
+				{
+					"name": "Get All Invitations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/invitations",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"invitations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Invitation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/invitations/1",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"invitations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add invitation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"16\",\r\n    \"placeId\": \"10\",\r\n    \"inDate\": \"26/02/2022 14:29\",\r\n    \"outDate\": \"26/02/2022 22:30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/invitations",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"invitations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete invitation by user id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/invitations/byuser/13",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"invitations",
+								"byuser",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete invitation by place id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/invitations/byplace/10",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"invitations",
+								"byplace",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete invitation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://udea-biosegura.herokuapp.com/api/invitations/1",
+							"protocol": "https",
+							"host": [
+								"udea-biosegura",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"invitations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
