@@ -1,1 +1,1 @@
-web: java -jar -Dspring.profiles.active=dev build/libs/biosegura-1.0.jar
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.udea.biosegura.BioseguraApplication
