@@ -24,7 +24,7 @@ public class UserController {
     public ResponseEntity<UserDTO> getUser(@PathVariable("idUser") String id) {
         return userService.getUser(id)
                 .map(usr-> new ResponseEntity<>(usr, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity("404 not found",HttpStatus.NOT_FOUND)); //Se quito <>
     }
 
     @PostMapping()
@@ -35,7 +35,7 @@ public class UserController {
     @DeleteMapping("/{idUser}")
     public ResponseEntity<UserDTO> delete(@PathVariable("idUser") String id) {
         if (userService.delete(id)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity("Delete Successfuly",HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }

@@ -1,6 +1,5 @@
 package com.udea.biosegura.domain.dto;
 
-import java.util.List;
 
 public class PlaceDTO {
 
@@ -8,8 +7,10 @@ public class PlaceDTO {
     private String namePlace;
     private String phone;
     private String address;
+    private String checkIn;
+    private String checkOut;
     private int capacity;
-    //private List<InvitationDTO> invitations;
+    private int actualCapacity;
 
     public String getIdPlace() {
         return idPlace;
@@ -43,6 +44,22 @@ public class PlaceDTO {
         this.address = address;
     }
 
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -51,13 +68,11 @@ public class PlaceDTO {
         this.capacity = capacity;
     }
 
-    /*
-    public List<InvitationDTO> getInvitations() {
-        return invitations;
+    public int getActualCapacity() {
+        return actualCapacity;
     }
 
-    public void setInvitations(List<InvitationDTO> invitations) {
-        this.invitations = invitations;
+    public void setActualCapacity(int actualCapacity) {
+        this.actualCapacity = actualCapacity;
     }
-     */
 }

@@ -15,7 +15,10 @@ public class Place {
     private String namePlace;
     private String phone;
     private String address;
+    private String checkIn;
+    private String checkOut;
     private int capacity;
+    private int actualCapacity;
 
     @OneToMany(mappedBy = "place",  cascade = {CascadeType.ALL})
     private List<Invitation> invitations;
@@ -60,11 +63,35 @@ public class Place {
         this.address = address;
     }
 
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
     public int getCapacity() {
         return capacity;
     }
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public int getActualCapacity() {
+        return actualCapacity;
+    }
+
+    public void setActualCapacity(int actualCapacity) {
+        this.actualCapacity = actualCapacity;
     }
 }

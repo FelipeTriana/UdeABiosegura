@@ -152,6 +152,7 @@ class UserControllerTest {
 
         //Assert
         assertEquals(HttpStatus.OK.value(), code.value());
+
     }
 
     @Test

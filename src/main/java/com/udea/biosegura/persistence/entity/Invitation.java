@@ -1,6 +1,7 @@
 package com.udea.biosegura.persistence.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -8,10 +9,10 @@ import javax.persistence.*;
 public class Invitation {
 
     @EmbeddedId   //Composite primary key
-    private InvitationPK idInvitation;
+    private InvitationPK id;
 
-    private String in_date;
-    private String out_date;
+    private String inDate;
+    private String outDate;
 
     @ManyToOne
     @MapsId("idUser")
@@ -23,28 +24,28 @@ public class Invitation {
     @JoinColumn(name = "id_place", insertable = false, updatable = false)
     private Place place;
 
-    public InvitationPK getIdInvitation() {
-        return idInvitation;
+    public InvitationPK getId() {
+        return id;
     }
 
-    public void setIdInvitation(InvitationPK idInvitation) {
-        this.idInvitation = idInvitation;
+    public void setId(InvitationPK id) {
+        this.id = id;
     }
 
-    public String getIn_date() {
-        return in_date;
+    public String getInDate() {
+        return inDate;
     }
 
-    public void setIn_date(String in_date) {
-        this.in_date = in_date;
+    public void setInDate(String inDate) {
+        this.inDate = inDate;
     }
 
-    public String getOut_date() {
-        return out_date;
+    public String getOutDate() {
+        return outDate;
     }
 
-    public void setOut_date(String out_date) {
-        this.out_date = out_date;
+    public void setOutDate(String outDate) {
+        this.outDate = outDate;
     }
 
     public User getUser() {

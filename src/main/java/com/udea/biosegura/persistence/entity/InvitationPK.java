@@ -2,30 +2,44 @@ package com.udea.biosegura.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 @Embeddable
 public class InvitationPK implements Serializable {
 
     @Column(name = "id_place")
-    private String idPlace;
+    private String placeid;
 
     @Column(name = "id_user")
-    private String idUser;
+    private String userid;
 
-    public String getIdPlace() {
-        return idPlace;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  //Problema aquí, se esta mapeando desde el dominion y si no lo definimos le lleva un nulo
+    @Column(name = "id_invitation")
+    private Integer invitation;
+
+    public String getPlaceid() {
+        return placeid;
     }
 
-    public void setIdPlace(String idPlace) {
-        this.idPlace = idPlace;
+    public void setPlaceid(String placeid) {
+        this.placeid = placeid;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public Integer getInvitationid() {
+        return invitation;
+    }
+
+    public void setInvitationid(Integer invitationId) {
+        this.invitation = invitationId;
     }
 }

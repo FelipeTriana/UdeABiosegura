@@ -1,9 +1,7 @@
 package com.udea.biosegura.persistence.mapper;
 
 import com.udea.biosegura.domain.dto.InvitationDTO;
-import com.udea.biosegura.domain.dto.PlaceDTO;
 import com.udea.biosegura.persistence.entity.Invitation;
-import com.udea.biosegura.persistence.entity.Place;
 
 
 import org.mapstruct.InheritInverseConfiguration;
@@ -17,17 +15,14 @@ import java.util.List;
 public interface InvitationMapper {
 
     @Mappings({
-            @Mapping(source = "idInvitation.idUser", target = "userId"),
-            @Mapping(source = "idInvitation.idPlace", target = "placeId")
+            @Mapping(source = "id.invitationid", target = "invitationId"),
+            @Mapping(source = "id.userid", target = "userId"),
+            @Mapping(source = "id.placeid", target = "placeId")
     })
     InvitationDTO toInvitationDTO(Invitation invitation);
     List<InvitationDTO> toInvitationsDTO(List<Invitation> invitations);
 
     @InheritInverseConfiguration
-    @Mappings({
-            @Mapping(target = "user", ignore = true),
-            @Mapping(target = "place", ignore = true)
-    })
     Invitation toInvitation(InvitationDTO invitationdto);
 
 }

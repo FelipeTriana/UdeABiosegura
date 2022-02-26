@@ -1,27 +1,30 @@
-package com.udea.biosegura.domain.dto;
+package com.udea.biosegura.models;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
-public class InvitationDTO {
-
+public class CreateInvitationInput {
     private Integer invitationId;
     private String userId;
     private String placeId;
     private String inDate;
     private String outDate;
-    private UserDTO user;
-    private PlaceDTO place;
 
-    public InvitationDTO() {
+    public CreateInvitationInput() {
+
     }
 
-    public InvitationDTO(String userId, String placeId, String inDate, String outDate, Integer invitationId) {
+    public CreateInvitationInput(Integer invitationId,String userId, String placeId, String inDate, String outDate) {
         this.invitationId = invitationId;
         this.userId = userId;
         this.placeId = placeId;
         this.inDate = inDate;
         this.outDate = outDate;
+    }
+
+    public Integer getInvitationId() {
+        return invitationId;
+    }
+
+    public void setInvitationId(Integer invitationId) {
+        this.invitationId = invitationId;
     }
 
     public String getUserId() {
@@ -54,29 +57,5 @@ public class InvitationDTO {
 
     public void setOutDate(String outDate) {
         this.outDate = outDate;
-    }
-
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
-    }
-
-    public PlaceDTO getPlace() {
-        return place;
-    }
-
-    public void setPlace(PlaceDTO place) {
-        this.place = place;
-    }
-
-    public Integer getInvitationId() {
-        return invitationId;
-    }
-
-    public void setInvitationId(Integer invitationId) {
-        this.invitationId = invitationId;
     }
 }
