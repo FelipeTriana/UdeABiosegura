@@ -19,6 +19,7 @@ public class Place {
     private String checkOut;
     private int capacity;
     private int actualCapacity;
+    private String imgUrl;
 
     @OneToMany(mappedBy = "place",  cascade = {CascadeType.ALL})
     private List<Invitation> invitations;
@@ -93,5 +94,13 @@ public class Place {
 
     public void setActualCapacity(int actualCapacity) {
         this.actualCapacity = actualCapacity;
+    }
+
+    public void setImgUrl(String imgUrl){
+        this.imgUrl = imgUrl;
+    }
+
+    public String getImgUrl(){
+        return this.imgUrl;
     }
 }

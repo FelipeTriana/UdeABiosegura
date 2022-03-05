@@ -11,6 +11,7 @@ public class PlaceDTO {
     private String checkOut;
     private int capacity;
     private int actualCapacity;
+    private String imgUrl;
 
     public String getIdPlace() {
         return idPlace;
@@ -74,5 +75,13 @@ public class PlaceDTO {
 
     public void setActualCapacity(int actualCapacity) {
         this.actualCapacity = actualCapacity;
+    }
+
+    public void setImgUrl(String imgUrl){
+        this.imgUrl = imgUrl;
+    }
+
+    public String getImgUrl(){
+        return this.imgUrl;
     }
 }
