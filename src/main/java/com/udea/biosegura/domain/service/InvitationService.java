@@ -38,7 +38,7 @@ public class InvitationService {
 
     public InvitationDTO save(InvitationDTO invitationdto){
 
-        UserDTO foundUser = userRepository.getUser(invitationdto.getUserId()).get(); //Con .get() lo saca del Optional?
+        UserDTO foundUser = userRepository.getUser(invitationdto.getUserId()).get();
         PlaceDTO foundPlace = placeRepository.getPlace(invitationdto.getPlaceId()).get();
         List<InvitationDTO> currentElements = invitationRepository.getAll();
 

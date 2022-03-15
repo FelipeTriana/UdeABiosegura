@@ -1,19 +1,19 @@
 package com.udea.biosegura.web.controller;
 
-import com.udea.biosegura.Pruebita;
 import com.udea.biosegura.domain.dto.InvitationDTO;
 import com.udea.biosegura.domain.dto.PlaceDTO;
 import com.udea.biosegura.domain.service.InvitationService;
 import com.udea.biosegura.domain.service.PlaceService;
 import com.udea.biosegura.models.CreateInvitationInput;
-import com.udea.biosegura.persistence.entity.InvitationPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("/invitations")
 public class InvitationController {
+
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
     private InvitationService invitationService;
@@ -50,37 +52,33 @@ public class InvitationController {
 
     @PostMapping()
     public ResponseEntity<InvitationDTO> save(@RequestBody CreateInvitationInput invitationInput) {
-        InvitationDTO invitationdto = new InvitationDTO();  //Es bueno instanciar así? no viola inyeccion de dependencias?
-        invitationdto.setUserId(invitationInput.getUserId());
-        invitationdto.setPlaceId(invitationInput.getPlaceId());
+        InvitationDTO invitationDto = new InvitationDTO();
+        invitationDto.setUserId(invitationInput.getUserId());
+        invitationDto.setPlaceId(invitationInput.getPlaceId());
         try {
             PlaceDTO foundPlace = placeService.getPlace(invitationInput.getPlaceId()).get();
-            Date currentDate = new Date();
 
-            Date outDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(invitationInput.getOutDate());
-            String InDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(currentDate);
 
-            String checkInst = InDate;  //fecha de entrada y salida deben ser en el mismo dia
-            String checkOutst = InDate;
-            checkInst = checkInst.replace(checkInst.substring(11,16), foundPlace.getCheckIn());
-            System.out.println(checkInst);
-            checkOutst = checkOutst.replace(checkOutst.substring(11,16), foundPlace.getCheckOut());
-            System.out.println(checkOutst);
+            LocalDateTime inDate = LocalDateTime.parse(invitationInput.getInDate(), formatter);
+            LocalDateTime outDate = LocalDateTime.parse(invitationInput.getOutDate(), formatter);
 
-            Date checkIn = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(checkInst);
-            Date checkOut = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(checkOutst);
-
-            if (outDate.after(currentDate) && outDate.after(checkIn) && outDate.before(checkOut)) {
-                String inputInDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(currentDate);
-                String inputOutDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(outDate);
-                invitationdto.setInDate(inputInDate);
-                invitationdto.setOutDate(inputOutDate);
-                return new ResponseEntity<>(invitationService.save(invitationdto), HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity("400 Bad Request: La fecha de salida ingresada no es " +
-                        "valida, verifique el horario de apertura y cierre del lugar", HttpStatus.BAD_REQUEST);
+            if(outDate.isBefore(inDate)){
+                return new ResponseEntity("400 Bad Request: La fecha de salida debe ser posterior a la de entrada", HttpStatus.BAD_REQUEST);
             }
-        } catch (ParseException ex) {
+
+            if(inDate.getYear() != outDate.getYear() ||
+                    inDate.getMonth().compareTo(outDate.getMonth()) != 0 ||
+                    inDate.getDayOfMonth() != outDate.getDayOfMonth()){
+
+                return new ResponseEntity("400 Bad Request: La fechas de entrada y salida deben ser en el mismo dia, mes y año", HttpStatus.BAD_REQUEST);
+
+            } else {
+                invitationDto.setInDate(inDate);
+                invitationDto.setOutDate(outDate);
+                return new ResponseEntity<>(invitationService.save(invitationDto), HttpStatus.CREATED);
+            }
+
+        } catch (DateTimeParseException ex) {
             Logger.getLogger(InvitationController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity("400 Bad Request: El formato de " +
                     "fecha ingresado no es valido", HttpStatus.BAD_REQUEST);
