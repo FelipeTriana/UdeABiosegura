@@ -1,22 +1,21 @@
 package com.udea.biosegura.domain.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class InvitationDTO {
 
     private Integer invitationId;
     private String userId;
     private String placeId;
-    private String inDate;
-    private String outDate;
+    private LocalDateTime inDate;
+    private LocalDateTime outDate;
     private UserDTO user;
     private PlaceDTO place;
 
     public InvitationDTO() {
     }
 
-    public InvitationDTO(String userId, String placeId, String inDate, String outDate, Integer invitationId) {
+    public InvitationDTO(String userId, String placeId, LocalDateTime inDate, LocalDateTime outDate, Integer invitationId) {
         this.invitationId = invitationId;
         this.userId = userId;
         this.placeId = placeId;
@@ -40,19 +39,19 @@ public class InvitationDTO {
         this.placeId = placeId;
     }
 
-    public String getInDate() {
+    public LocalDateTime getInDate() {
         return inDate;
     }
 
-    public void setInDate(String inDate) {
+    public void setInDate(LocalDateTime inDate) {
         this.inDate = inDate;
     }
 
-    public String getOutDate() {
+    public LocalDateTime getOutDate() {
         return outDate;
     }
 
-    public void setOutDate(String outDate) {
+    public void setOutDate(LocalDateTime outDate) {
         this.outDate = outDate;
     }
 
