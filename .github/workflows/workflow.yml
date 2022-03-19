@@ -15,16 +15,6 @@ jobs:
   # El nombre de un job
   build:
     runs-on: ubuntu-latest
-   # steps:
-      # El cual revisa nuestro repo dentro del workspace de github para que el job lo acceda
-    #  - uses: actions/checkout@v2
-      # Podemos darle nombres a nuestros pasos y luego asignarle un comando que lo corra
-     # - name: Set up JDK
-      #  uses: actions/setup-java@v1
-       # with:
-        #  java-version: 11
-      #- run: ./gradlew clean test --info
-      
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
