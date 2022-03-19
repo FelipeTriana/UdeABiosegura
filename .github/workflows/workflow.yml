@@ -15,16 +15,6 @@ jobs:
   # El nombre de un job
   build:
     runs-on: ubuntu-latest
-   # steps:
-      # El cual revisa nuestro repo dentro del workspace de github para que el job lo acceda
-    #  - uses: actions/checkout@v2
-      # Podemos darle nombres a nuestros pasos y luego asignarle un comando que lo corra
-     # - name: Set up JDK
-      #  uses: actions/setup-java@v1
-       # with:
-        #  java-version: 11
-      #- run: ./gradlew clean test --info
-      
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
@@ -43,8 +33,14 @@ jobs:
           path: build/libs
 
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "udea-biosegura" #Must be unique in Heroku
+          heroku_app_name: "udea-biosegura"
           heroku_email: "mateo.baena@hotmail.com"
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: failing tests report
+          path: file:///home/runner/work/UdeABiosegura/UdeABiosegura/build/reports/tests/test/index.html
