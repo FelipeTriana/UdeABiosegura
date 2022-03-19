@@ -10,11 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +22,8 @@ import java.util.logging.Logger;
 @RequestMapping("/invitations")
 public class InvitationController {
 
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final DateTimeFormatter localTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     @Autowired
     private InvitationService invitationService;
@@ -57,21 +57,30 @@ public class InvitationController {
         invitationDto.setPlaceId(invitationInput.getPlaceId());
         try {
             PlaceDTO foundPlace = placeService.getPlace(invitationInput.getPlaceId()).get();
+            LocalTime checkInDate = LocalTime.parse(foundPlace.getCheckIn(), localTimeFormatter);
+            LocalTime checkOutDate = LocalTime.parse(foundPlace.getCheckOut(), localTimeFormatter);
+            LocalDateTime inDate = LocalDateTime.parse(invitationInput.getInDate(), localDateFormatter);
+            LocalDateTime outDate = LocalDateTime.parse(invitationInput.getOutDate(), localDateFormatter);
 
+            System.out.println(checkOutDate.getHour()+" "+checkInDate.getHour());
+            System.out.println(outDate.getHour()+" "+inDate.getHour());
 
-            LocalDateTime inDate = LocalDateTime.parse(invitationInput.getInDate(), formatter);
-            LocalDateTime outDate = LocalDateTime.parse(invitationInput.getOutDate(), formatter);
-
-            if(outDate.isBefore(inDate)){
+            if (outDate.isBefore(inDate)) {
                 return new ResponseEntity("400 Bad Request: La fecha de salida debe ser posterior a la de entrada", HttpStatus.BAD_REQUEST);
             }
 
-            if(inDate.getYear() != outDate.getYear() ||
+            if (inDate.getYear() != outDate.getYear() ||
                     inDate.getMonth().compareTo(outDate.getMonth()) != 0 ||
-                    inDate.getDayOfMonth() != outDate.getDayOfMonth()){
+                    inDate.getDayOfMonth() != outDate.getDayOfMonth()) {
 
                 return new ResponseEntity("400 Bad Request: La fechas de entrada y salida deben ser en el mismo dia, mes y año", HttpStatus.BAD_REQUEST);
 
+            }
+            if ((inDate.getHour() < checkInDate.getHour() || inDate.getHour() > checkOutDate.getHour() ) ||
+                    (outDate.getHour() < checkInDate.getHour() || outDate.getHour() > checkOutDate.getHour())) {
+
+
+                return new ResponseEntity("400 Bad Request: La fechas de entrada y salida estan por fuera del horario del lugar. "+"La apertura es a las "+checkInDate+ ", cierre a las "+checkOutDate, HttpStatus.BAD_REQUEST);
             } else {
                 invitationDto.setInDate(inDate);
                 invitationDto.setOutDate(outDate);
@@ -81,7 +90,7 @@ public class InvitationController {
         } catch (DateTimeParseException ex) {
             Logger.getLogger(InvitationController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity("400 Bad Request: El formato de " +
-                    "fecha ingresado no es valido", HttpStatus.BAD_REQUEST);
+                    "fecha ingresada no es valido (yyyy-MM-dd HH:mm:ss)", HttpStatus.BAD_REQUEST);
         }
     }
 
