@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class UserServiceTest {
-/*
+
     @Mock
     private UserRepository userRepository;
 
@@ -72,5 +72,5 @@ class UserServiceTest {
         System.out.println(responseService);
         assertEquals(true, responseService);
     }
-*/
+
 }

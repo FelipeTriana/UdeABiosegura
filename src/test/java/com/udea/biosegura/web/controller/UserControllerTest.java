@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class UserControllerTest {
-    /*
+
     @Mock
     private UserService userService;
 
@@ -72,7 +72,7 @@ class UserControllerTest {
            -> Must mock the getUser method to return the UserDTO established in the setUp()
         * */
         //Arrange
-        /*Optional<UserDTO> userDTOOptional = Optional.of(userdto);
+        Optional<UserDTO> userDTOOptional = Optional.of(userdto);
         when(userService.getUser(userdto.getIdUser())).thenReturn(userDTOOptional);
 
         String emailToCompare = "mateo.baena@udea.edu.co";
@@ -120,7 +120,7 @@ class UserControllerTest {
         /* Must mock that any UserDTO object can be used to create a new one
         * */
         //Arrange
-        /*when(userService.save(any(UserDTO.class))).thenReturn(new UserDTO());
+        when(userService.save(any(UserDTO.class))).thenReturn(new UserDTO());
 
         //Act
         UserDTO createdUser = userController.save(new UserDTO()).getBody();
@@ -166,5 +166,5 @@ class UserControllerTest {
 
         //Assert
         assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
-    }*/
+    }
 }
