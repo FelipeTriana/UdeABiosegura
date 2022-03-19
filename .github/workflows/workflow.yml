@@ -38,9 +38,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "udea-biosegura"
           heroku_email: "mateo.baena@hotmail.com"
-          
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: failing tests report
-          path: file:///home/runner/work/UdeABiosegura/UdeABiosegura/build/reports/tests/test/index.html
