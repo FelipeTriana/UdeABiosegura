@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class PlaceControllerTest {
-
+/*
     @Mock
     private PlaceService placeService;
 
@@ -153,6 +153,6 @@ class PlaceControllerTest {
 
         //Assert
         assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
-    }
+    }*/
 
 }
