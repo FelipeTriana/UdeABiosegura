@@ -30,6 +30,26 @@
 					"response": []
 				},
 				{
+					"name": "Get All Users Local",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add New User",
 					"request": {
 						"method": "POST",
@@ -51,6 +71,35 @@
 								"herokuapp",
 								"com"
 							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New User Rename",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUser\": \"3\",\r\n    \"name\": \"Daniel Monroy\",\r\n    \"phone\": \"3188231997\",\r\n    \"email\": \"daniel.monroym@udea.edu.co\",\r\n    \"address\": \"Diagonal 846\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
 							"path": [
 								"api",
 								"users"
@@ -131,6 +180,27 @@
 					"response": []
 				},
 				{
+					"name": "Get All Places Local",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/places/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"places",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get One Place",
 					"request": {
 						"method": "GET",
@@ -159,7 +229,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"idPlace\": \"13\",\r\n        \"namePlace\": \"Facultad de Ingenieria\",\r\n        \"phone\": \"951\",\r\n        \"address\": \"Bloque 19\",\r\n        \"capacity\": 8,\r\n        \"actualCapacity\": 8,\r\n        \"checkIn\": \"10:00\",\r\n        \"checkOut\": \"11:00\",\r\n        \"imgUrl\": \"https://i.imgur.com/PYUqPqx.jpg\"\r\n    }",
+							"raw": "{\r\n        \"idPlace\": \"1\",\r\n        \"namePlace\": \"Facultad de Ingenieria\",\r\n        \"phone\": \"951\",\r\n        \"address\": \"Bloque 19\",\r\n        \"capacity\": 8,\r\n        \"actualCapacity\": 8,\r\n        \"checkIn\": \"10:00\",\r\n        \"checkOut\": \"11:00\",\r\n        \"imgUrl\": \"https://i.imgur.com/PYUqPqx.jpg\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -174,6 +244,36 @@
 								"herokuapp",
 								"com"
 							],
+							"path": [
+								"api",
+								"places",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Place Local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idPlace\": \"3\",\r\n    \"namePlace\": \"Facultad de Ingenieria\",\r\n    \"phone\": \"951\",\r\n    \"address\": \"Bloque 19\",\r\n    \"checkIn\": \"10:00\",\r\n    \"checkOut\": \"11:00\",\r\n    \"capacity\": 8,\r\n    \"actualCapacity\": 8,\r\n    \"imgUrl\": \"https://i.imgur.com/PYUqPqx.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/places/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
 							"path": [
 								"api",
 								"places",
@@ -267,7 +367,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"16\",\r\n    \"placeId\": \"11\",\r\n    \"inDate\": \"05/03/2022 10:02\",\r\n    \"outDate\": \"05/03/2022 10:30\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"3\",\r\n    \"placeId\": \"2\",\r\n    \"inDate\": \"2022-03-05 05:14\",\r\n    \"outDate\": \"2022-03-05 18:14\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -282,6 +382,35 @@
 								"herokuapp",
 								"com"
 							],
+							"path": [
+								"api",
+								"invitations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add invitation Local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"3\",\r\n    \"placeId\": \"2\",\r\n    \"inDate\": \"2022-03-05 05:14\",\r\n    \"outDate\": \"2022-03-05 18:14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/invitations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
 							"path": [
 								"api",
 								"invitations"
