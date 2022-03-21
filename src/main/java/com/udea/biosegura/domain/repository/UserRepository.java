@@ -11,5 +11,6 @@ public interface UserRepository {
     Optional<UserDTO> getUser(String idUser);
     UserDTO save(UserDTO userdto);
     String delete(String idUser);
+    Optional<UserDTO> getUserByEmail(String email);
 
 }

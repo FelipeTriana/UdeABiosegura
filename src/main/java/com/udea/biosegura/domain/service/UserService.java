@@ -27,4 +27,6 @@ public class UserService {
         }).orElse(false);
     }
 
+    public Optional<UserDTO> getUserWithEmail(String email){return userRepository.getUserByEmail(email);}
+
 }
