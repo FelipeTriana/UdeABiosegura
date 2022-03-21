@@ -44,4 +44,10 @@ public class UserPersistenceRepository implements UserRepository {
         System.out.println("Success");
         return "Success";
     }
+
+    @Override
+    public Optional<UserDTO> getUserByEmail(String email) {
+        Optional<User> user = userCrudRepository.findByEmail(email);  //Ready
+        return  user.map(usr -> mapper.toUserDTO(usr));
+    }
 }
