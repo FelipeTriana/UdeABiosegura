@@ -2,7 +2,6 @@ package com.udea.biosegura.web.controller;
 
 import com.udea.biosegura.domain.dto.PlaceDTO;
 import com.udea.biosegura.domain.service.PlaceService;
-import com.udea.biosegura.persistence.entity.Place;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +18,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class PlaceControllerTest {
-/*
     @Mock
     private PlaceService placeService;
 
@@ -36,6 +34,10 @@ class PlaceControllerTest {
         placedto.setPhone("2756325");
         placedto.setAddress("Bloque 19");
         placedto.setCapacity(50);
+        placedto.setActualCapacity(50);
+        placedto.setImgUrl("https://i.imgur.com/LmJSpwb.jpg");
+        placedto.setCheckIn("06:00");
+        placedto.setCheckOut("08:00");
     }
 
     @Test
@@ -111,7 +113,7 @@ class PlaceControllerTest {
         when(placeService.save(any(PlaceDTO.class))).thenReturn(new PlaceDTO());
 
         //Act
-        PlaceDTO place = placeController.save(new PlaceDTO()).getBody();
+        PlaceDTO place = placeController.save(placedto).getBody();
 
         //Assert
         assertNotNull(place);
@@ -123,10 +125,31 @@ class PlaceControllerTest {
         when(placeService.save(any(PlaceDTO.class))).thenReturn(new PlaceDTO());
 
         //Act
-        HttpStatus code = placeController.save(new PlaceDTO()).getStatusCode();
+        HttpStatus code = placeController.save(placedto).getStatusCode();
 
         //Assert
         assertEquals(HttpStatus.CREATED.value(), code.value());
+    }
+
+    @Test
+    public void shouldReturnStatusCode400IfTheOutDateIsBeforeTheInDate(){
+        when(placeService.save(any(PlaceDTO.class))).thenReturn(new PlaceDTO());
+
+        PlaceDTO newPlaceDTO = new PlaceDTO();
+        newPlaceDTO.setIdPlace("1");
+        newPlaceDTO.setNamePlace("Auditorio");
+        newPlaceDTO.setPhone("2756325");
+        newPlaceDTO.setAddress("Bloque 19");
+        newPlaceDTO.setCapacity(50);
+        newPlaceDTO.setActualCapacity(50);
+        newPlaceDTO.setImgUrl("https://i.imgur.com/LmJSpwb.jpg");
+        newPlaceDTO.setCheckIn("08:00");
+        newPlaceDTO.setCheckOut("06:00");
+
+
+        HttpStatus code = placeController.save(newPlaceDTO).getStatusCode();
+
+        assertEquals(HttpStatus.BAD_REQUEST, code);
     }
 
     @Test
@@ -153,6 +176,5 @@ class PlaceControllerTest {
 
         //Assert
         assertEquals(HttpStatus.NOT_FOUND.value(), code.value());
-    }*/
-
+    }
 }

@@ -48,8 +48,6 @@ public class InvitationController {
                 .orElse(new ResponseEntity("404 not found", HttpStatus.NOT_FOUND)); //Se quito <>
     }
 
-
-
     @PostMapping()
     public ResponseEntity<InvitationDTO> save(@RequestBody CreateInvitationInput invitationInput) {
         InvitationDTO invitationDto = new InvitationDTO();
@@ -90,7 +88,7 @@ public class InvitationController {
         } catch (DateTimeParseException ex) {
             Logger.getLogger(InvitationController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity("400 Bad Request: El formato de " +
-                    "fecha ingresada no es valido (yyyy-MM-dd HH:mm:ss)", HttpStatus.BAD_REQUEST);
+                    "fecha ingresada no es valido (yyyy-MM-dd HH:mm)", HttpStatus.BAD_REQUEST);
         }
     }
 
