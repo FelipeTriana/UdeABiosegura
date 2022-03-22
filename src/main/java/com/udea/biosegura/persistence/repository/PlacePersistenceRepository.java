@@ -41,7 +41,6 @@ public class PlacePersistenceRepository implements PlaceRepository {
     @Override
     public String delete(String idPlace) {
         placeCrudRepository.deleteById(idPlace);                       //Ready
-        System.out.println("Success");
         return "Success";
     }
 }

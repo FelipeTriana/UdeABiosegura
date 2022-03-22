@@ -3,6 +3,7 @@ package com.udea.biosegura.domain.service;
 import com.udea.biosegura.domain.dto.PlaceDTO;
 import com.udea.biosegura.domain.repository.PlaceRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -35,7 +36,10 @@ class PlaceServiceTest {
         placedto.setPhone("2756325");
         placedto.setAddress("Bloque 19");
         placedto.setCapacity(50);
-
+        placedto.setActualCapacity(50);
+        placedto.setCheckIn("05:30");
+        placedto.setCheckOut("10:30");
+        placedto.setImgUrl("https://i.imgur.com/LmJSpwb.jpg");
         optPlaceDto = Optional.of(placedto);
         when(placeRepository.getPlace("1")).thenReturn(optPlaceDto);
     }
@@ -48,7 +52,6 @@ class PlaceServiceTest {
 
     @Test
     void getPlace() {
-
         Optional<PlaceDTO> reponseService;
         reponseService = placeService.getPlace("1");
         assertEquals(Optional.of("2756325"), reponseService.map(usr -> usr.getPhone()));
@@ -60,11 +63,11 @@ class PlaceServiceTest {
         assertNotNull(placeService.save(new PlaceDTO()));
     }
 
+    @DisplayName("Should return true when a found place is deleted")
     @Test
-    void delete() {
+    void deleteFoundPlace() {
         when(placeRepository.delete("1")).thenReturn("Success");
         boolean responseService = placeService.delete("1");
-        System.out.println(responseService);
-        assertEquals(true, responseService);
+        assertTrue(responseService);
     }
 }
