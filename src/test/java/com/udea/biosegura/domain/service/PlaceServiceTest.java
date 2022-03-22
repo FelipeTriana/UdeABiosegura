@@ -16,7 +16,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class PlaceServiceTest {
-/*
     @Mock
     private PlaceRepository placeRepository;
 
@@ -67,5 +66,5 @@ class PlaceServiceTest {
         boolean responseService = placeService.delete("1");
         System.out.println(responseService);
         assertEquals(true, responseService);
-    }*/
+    }
 }
